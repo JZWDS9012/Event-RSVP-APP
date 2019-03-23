@@ -1,0 +1,13 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+<h3> Finalize this question? </h3>
+<form method="post">{% csrf_token %}    
+	<button type="submit" class="btn btn-primary btn-block">Yes!</button><br>
+</form>
+<form action="{% url 'rsvp_event:detail_event' event_id %}">{% csrf_token %}   
+	<button type="submit" class="btn btn-primary btn-block" >No!</button><br>
+</form>
+
+{% endblock %}

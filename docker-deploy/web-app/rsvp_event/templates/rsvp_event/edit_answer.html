@@ -1,0 +1,15 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+{% block content %}
+<h4><a href="../">< back</a></h4>
+<h3> Please choose the question you want to reanswer: </h3>
+{% if latest_question_list %}
+  {% for question in latest_question_list %}
+  	{% if question.activate %}
+    <h4><a href="{{ question.id }}">{{ question.question_text }}</a></h4>   
+    {% endif %}
+  {% endfor %}
+{% else %}
+<p>No question now.</p>
+{% endif %}
+
+{% endblock %}

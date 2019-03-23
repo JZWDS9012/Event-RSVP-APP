@@ -1,0 +1,70 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+
+<h3> Event Detail </h3>
+<p> Title: {{event.title}}</p>
+<p> Date: {{event.date}}</p>
+<p> Location: {{event.location}}</p>
+<hr>
+
+<h3> User List </h3>
+<h4> Owners: </h4>
+{% if owner_list %}
+  {% for owner in owner_list %}
+    <li>{{ owner }}</li>
+  {% endfor %}
+{% else %}
+<p>No owner now.</p>
+{% endif %}
+<hr>
+<h4> Vendors: </h4>
+{% if vendor_list %}
+  {% for vendor in vendor_list %}
+    <li>{{ vendor }}</li>
+  {% endfor %}
+{% else %}
+<p>No vendor now.</p>
+{% endif %}
+<hr>
+<h4> Guests: </h4>
+{% if guest_list %}
+  {% for guest in guest_list %}
+    <li>{{ guest }}</li>
+  {% endfor %}
+{% else %}
+<p>No guest now.</p>
+{% endif %}
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-block" formaction="{% url 'rsvp_event:add_user' event_id %}">Add or Change Users</button><br>
+</form>
+<hr>
+
+
+<h3> Question List </h3>
+{% if latest_question_list %}
+  {% for question in latest_question_list %}
+  	<h4><a href="{{ question.id }}/">{{ question.question_text }}</a></h4>
+    <ol>
+  	{% if question.q_type == 'Choice' %}
+  		{% for choice in question.choice_set.all %}
+  			<li>{{ choice }} => votes: {{choice.votes}}</li>
+  		{% endfor %}
+  	{% else %}
+  		{% for answer in question.answer_set.all %}
+  			<li>{{ answer }}</li>
+  		{% endfor %}
+  	{% endif %}
+    </ol>
+  {% endfor %}
+{% else %}
+<p>No question now.</p>
+{% endif %}
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-block" formaction="{% url 'rsvp_event:add_choice_question' event_id %}">Add Choice Question</button><br>
+  <button type="submit" class="btn btn-primary btn-block" formaction="{% url 'rsvp_event:add_answer_question' event_id %}">Add Answer Question</button><br>
+</form>
+{% endblock %}

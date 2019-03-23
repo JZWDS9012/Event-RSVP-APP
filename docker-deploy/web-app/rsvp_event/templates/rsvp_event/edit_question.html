@@ -1,0 +1,19 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+<h3> Edit Question </h3>
+<form method="post">{% csrf_token %}     
+	<input type="submit" name='save' value="Save"></input>
+	<input type="submit" name='delate' value="Delete Question"></input><br>
+	{{ questionform.as_p }} 
+</form>
+{% if question.q_type == 'Choice' %}
+	<form action="{% url 'rsvp_event:add_choice' event_id question_id %}">{% csrf_token %}   
+	  {% for choice in latest_choice_list %}
+	  	<li><a href="{{ choice.id }}/">{{ choice.choice_text }}</a></li>	
+	  {% endfor %}
+	  <button type="submit" class="btn btn-primary btn-block" >Add Choice</button><br>
+	</form>
+{% endif %}
+{% endblock %}

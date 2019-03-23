@@ -1,0 +1,34 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+
+<h4><a href="../">< back</a></h4>
+<p> Event Detail </p>
+<p> Title: {{event.title}}</p>
+<p> Date: {{event.date}}</p>
+<p> Location: {{event.location}}</p>
+<hr>
+
+<h3> Your answer Sheet </h3>
+<form action="{% url 'rsvp_event:edit_answer' event_id %}" method="post">{% csrf_token %}     
+	<button type="submit" class="btn btn-primary btn-block">Edit Your answers</button>
+</form>
+
+{% if latest_list %}
+  {% for element in latest_list %}
+  	{% if forloop.counter|divisibleby:"2" %}
+  		{% if element %}
+   			{{ element }}<br>
+   		{% else %}
+     		Answer: none<br>
+   		{% endif %} 
+   {% else %}
+     	<br><li>{{ element }}</li><br>
+   {% endif %}  
+  {% endfor %}
+
+{% else %}
+<p>No question avaliable.</p >
+{% endif %}
+
+{% endblock %}

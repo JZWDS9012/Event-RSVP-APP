@@ -1,0 +1,38 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+<h3> Event Detail </h3>
+<p> Title: {{event.title}}</p>
+<p> Date: {{event.date}}</p>
+<p> Location: {{event.location}}</p>
+<hr>
+
+<h3> Question List </h3>
+{% if latest_question_list %}
+  {% for question in latest_question_list %}
+
+  {% if question.activate == True %}
+    <li><a href="{{ question.id }}/finalization/">{{ question.question_text }}</a></li>
+  {% elif question.activate == False %}
+  	<li>{{ question.question_text }}</li>
+  {% endif %}
+  <ol>
+  	{% if question.q_type == 'Choice' %}
+  		{% for choice in question.choice_set.all %}
+  			<li>{{ choice }} => votes: {{choice.votes}}</li>
+  		{% endfor %}
+  	{% else %}
+  		{% for answer in question.answer_set.all %}
+  			<li>{{ answer }}</li>
+  		{% endfor %}
+  	{% endif %}
+  </ol>
+  {% endfor %}
+{% else %}
+<p>No question avaliable.</p>
+{% endif %}
+
+
+
+{% endblock %}

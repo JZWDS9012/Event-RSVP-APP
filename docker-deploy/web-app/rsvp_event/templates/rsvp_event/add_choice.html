@@ -1,0 +1,10 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+<h3> Add Choice </h3>
+<form method="post">{% csrf_token %}
+  {{ choiceform.as_p }}      
+  <button type="submit" class="btn btn-primary btn-block">Save</button><br>
+</form>
+{% endblock %}

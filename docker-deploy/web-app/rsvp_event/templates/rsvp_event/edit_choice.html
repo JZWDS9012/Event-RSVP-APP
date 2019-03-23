@@ -1,0 +1,13 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h4><a href="../">< back</a></h4>
+
+
+<h3> Edit Choice </h3>
+<form method="post">{% csrf_token %}     
+	<input type="submit" name='save' value="Save"></input>
+	<input type="submit" name='delete' value="Delete Choice"></input><br>
+	{{ choiceform.as_p }} 
+</form>
+{% endblock %}

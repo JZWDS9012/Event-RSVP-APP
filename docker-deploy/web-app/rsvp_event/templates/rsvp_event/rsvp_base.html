@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}RSVP Event System{% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+      .errorlist {
+      color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-center">
+      <div class="container">
+ <div class="flex-center">
+   <div class="unit-1-2 unit-1-on-mobile">
+     <header>
+       <h1>RSVP Event System</h1>
+       <div class="flex-center top-gap text-medium">
+          <a href="{% url 'rsvp_event:logout' %}">logout</a>
+       </div>
+       <hr>
+     </header>
+     <main>
+       {% block content %}
+       {% endblock %}
+     </main>
+   </div>
+ </div>
+      </div>
+    </div>
+  </body>
+  </html>

@@ -1,0 +1,18 @@
+{% extends 'rsvp_event/rsvp_base.html' %}
+
+{% block content %}
+<h3> Event List </h3>
+{% if latest_event_list %}
+<ul>
+  {% for event in latest_event_list %}
+  <li><a href="{{ event.id }}/">{{ event.title }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No event is available.</p>
+{% endif %}
+<form action="{% url 'rsvp_event:add_event' %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-block">Add Event</button>
+</form>
+{% endblock %}
